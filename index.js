@@ -11,10 +11,10 @@ let newVal;
 //uid 新浪uid
 //ms 一般不用改
 let config = {
-    user: 'xxx@qq.com',
-    pass: 'fgsdxeifsxmdvexxdxxxdxsaususbsggj',
-    to: 'blexxss@unlxiar.com',
-    uid: 27475xx14424,
+    user: '370732889@qq.com',
+    pass: 'vqclhcsdudqcxcxbaxf',
+    to: 'bless@unliar.com',
+    uid: 1078007814,
     ms: 10
 }
 let transport = nodemailer.createTransport({
@@ -70,7 +70,7 @@ requestUrl(config.uid).then(res => { oldVal = res[0].inner }).catch((e) => { con
                     if (error) {
                         console.log('发送失败！' + error)
                     } else {
-                        console.log('发送成功！' + to);
+                        console.log('发送成功！' + config.to);
                     }
                 });
                 oldVal = newVal;
