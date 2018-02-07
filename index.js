@@ -19,7 +19,7 @@ let preWeibo = {
 listener.on('weibo', weibo => {
   const mailServer = createMailServer(service, user, pass)
   const subject = `你关注的用户有新微博了,${new Date()}`
-  const html = `<p>你关注人发了微博,点击红字查看！<hr><a style="color:red" href=${weibo.link}>${weibo.inner}于： ${weibo.timer}'</a></p>`
+  const html = `<p>你关注人发了微博,点击红字查看！<hr><a style="color:red" href=${weibo.link}>${weibo.main}于： ${weibo.time}'</a></p>`
   try {
     /**发送邮件成功 */
     sendMail(mailServer, user, to, subject, html).then(() => {
@@ -132,6 +132,7 @@ const dataDiff = (preWeibo, newWeibo) => {
 
 }
 
+
 /**
  * 定时任务
  */
@@ -140,6 +141,10 @@ schedule.scheduleJob({
 }, async () => {
   /**获取数据 */
   const weiboData = await getLatestWeibo(uid)
+  /**如果数据尚未初始化 */
+  if (!preWeibo.link === true) {
+    preWeibo = weiboData
+  }
   /**对比数据 */
   const diffResult = dataDiff(preWeibo, weiboData)
   /**如果数据存在差异,激活微博事件 */
