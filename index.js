@@ -91,7 +91,7 @@ const getLatestWeibo = async uid => {
     const latestWeibo = $('.wgtCell .wgtCell_con').first()
     console.log('获取新微博成功')
     return {
-      main: latestWeibo.find('.wgtCell_txt').text(),
+      main: latestWeibo.find('.wgtCell_txt').text() + latestWeibo.find('wgt_img').attr('src'),
       time: latestWeibo.find('.wgtCell_tm').text(),
       link: latestWeibo.find('.wgtCell_tm a').attr('href')
     }
