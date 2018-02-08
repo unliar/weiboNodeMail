@@ -5,17 +5,14 @@ const schedule = require('node-schedule')
 const Events = require('events')
 const listener = new Events()
 const { service, user, pass, uid, to } = require('./config.json')
-/**
- * 历史微博
- */
+
+/**历史微博 */
 let preWeibo = {
   main: null,
   time: null,
   link: null
 }
-/**
- * 监听新微博
- */
+/**监听新微博 */
 listener.on('weibo', weibo => {
   const mailServer = createMailServer(service, user, pass)
   const subject = `你关注的用户有新微博了,${new Date()}`
@@ -38,6 +35,7 @@ listener.on('weibo', weibo => {
  * @param {string} service - 邮箱服务提供商,具体查看nodemailer模块 
  * @param {string} user - 邮箱
  * @param {string} pass - 密码
+ * @returns {object} 邮件服务
  */
 const createMailServer = (service, user, pass) => {
   const mailServer = nodemailer.createTransport({
@@ -58,6 +56,7 @@ const createMailServer = (service, user, pass) => {
  * @param {string} to - 收件人
  * @param {string} subject - 邮件主题
  * @param {string} html - 邮件正文
+ * @returns {promise} 发送邮件结果
  */
 const sendMail = (mailServer, from, to, subject, html) => {
   return new Promise((resolve, reject) => {
@@ -82,6 +81,7 @@ const sendMail = (mailServer, from, to, subject, html) => {
  * 获取最新数据
  * 
  * @param {number} - uid 用户的pid,请自行F12查看
+ * @returns {promise}
  */
 
 const getLatestWeibo = async uid => {
@@ -108,6 +108,7 @@ const getLatestWeibo = async uid => {
  * 
  * @param {string} preWeibo - 旧微博 
  * @param {string} newWeibo - 新微博
+ * @returns {boolean} 是否更新
  */
 const dataDiff = (preWeibo, newWeibo) => {
   /**
