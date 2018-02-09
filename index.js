@@ -98,7 +98,11 @@ const getLatestWeibo = async uid => {
     }
   } catch (error) {
     console.log("获取最新weibo失败", error)
-    return null
+    return {
+      main: null,
+      time: null,
+      link: null
+    }
   }
 
 }
