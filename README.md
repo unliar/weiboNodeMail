@@ -1,9 +1,19 @@
 # 微博定时爬虫
 >Node爬虫获取用户的最新微博信息,并且对比是否更新，更新了则发送邮件
 npm i
+
 启动
-npm test或者node index.js
-修改config配置项即可
+
+```
+npm test
+```
+或者
+
+```
+node index.js
+```
+
+修改config.json配置即可运行
 
 ```
 {
